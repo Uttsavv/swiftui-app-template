@@ -12,7 +12,7 @@ Then record the answers in `docs/design-brief.md`, set `status: confirmed`, and 
 
 ## Design system (`Packages/DesignSystem`)
 - Use tokens only: `theme.colors.*`, `.dsFont(_)`, `Spacing`, `Radius`, `.dsAnimation(_:value:)`, `.dsTransition(_)`. No hex values or magic numbers in feature code.
-- Glass is for the floating control layer only, never content. Prefer system bars, sheets, `TabView`, `.buttonStyle(.glass/.glassProminent)`. Custom glass: `dsGlass` inside `DSGlassCluster`. Don't put custom backgrounds on navigation bars, toolbars, tab bars or sheets.
+- Glass only on small floating controls: tab bar, toolbars, mini-player/status strips, floating buttons. Never on content, and never on sheets: give every sheet a solid background with `.dsSolidSheet()`. Prefer system bars, `TabView`, `.buttonStyle(.glass/.glassProminent)`. Custom glass: `dsGlass` inside `DSGlassCluster`. Don't put custom backgrounds on navigation bars, toolbars or tab bars.
 - Corners: top-level containers use `Radius` + `dsContainer`; anything nested uses `dsConcentricBackground` / `dsConcentricClip`.
 - No one-sided borders or accent stripes. Separate with fill, spacing, or an even hairline.
 - Follow the system appearance; no in-app light/dark switch.

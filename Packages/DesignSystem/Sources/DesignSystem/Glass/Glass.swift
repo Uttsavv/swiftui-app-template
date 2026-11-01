@@ -1,8 +1,9 @@
 import SwiftUI
 
-// Glass is for floating controls only, never content. Prefer system bars, sheets and
-// `.buttonStyle(.glass/.glassProminent)`; use these helpers only for custom floating controls,
-// grouped in `DSGlassCluster`. The system adapts glass to Reduce Transparency and Increase Contrast.
+// Glass is only for small floating controls: tab bar, toolbars, mini-player strips, floating
+// buttons. Never content, and never sheets: see-through sheets look muddy, so use `dsSolidSheet()`.
+// Prefer system bars and `.buttonStyle(.glass/.glassProminent)`; use these helpers only for custom
+// floating controls, grouped in `DSGlassCluster`. The system adapts glass to accessibility settings.
 
 /// Which glass variant to use for a custom floating control.
 public enum DSGlassVariant: Sendable {
@@ -21,6 +22,12 @@ extension View {
     /// Liquid Glass behind a custom floating control, in a custom shape.
     public func dsGlass(_ variant: DSGlassVariant = .regular, tint: Color? = nil, interactive: Bool = true, in shape: some Shape) -> some View {
         glassEffect(Self.makeGlass(variant, tint: tint, interactive: interactive), in: shape)
+    }
+
+    /// Solid themed background for a sheet's content, replacing the default see-through glass.
+    /// Apply to the root view inside `.sheet { }`.
+    public func dsSolidSheet() -> some View {
+        modifier(DSSolidSheetModifier())
     }
 
     /// A 35% dark layer for clear glass placed over bright media (HIG Materials).
@@ -58,5 +65,13 @@ public struct DSGlassCluster<Content: View>: View {
         GlassEffectContainer(spacing: spacing) {
             HStack(spacing: spacing) { content }
         }
+    }
+}
+
+private struct DSSolidSheetModifier: ViewModifier {
+    @Environment(\.theme) private var theme
+
+    func body(content: Content) -> some View {
+        content.presentationBackground(theme.colors.surface)
     }
 }
