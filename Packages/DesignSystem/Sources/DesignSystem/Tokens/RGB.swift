@@ -1,7 +1,7 @@
 import Foundation
 
 /// A plain sRGB colour value. Kept free of SwiftUI so contrast can be unit tested.
-public struct RGB: Sendable, Hashable, CustomStringConvertible {
+nonisolated public struct RGB: Sendable, Hashable, CustomStringConvertible {
     public var red: Double
     public var green: Double
     public var blue: Double

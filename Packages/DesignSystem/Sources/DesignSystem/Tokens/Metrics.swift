@@ -1,7 +1,7 @@
 import SwiftUI
 
 /// Spacing scale in points. Pair with `@ScaledMetric` when spacing should grow with Dynamic Type.
-public enum Spacing {
+nonisolated public enum Spacing {
     public static let xxs: CGFloat = 2
     public static let xs: CGFloat = 4
     public static let s: CGFloat = 8
@@ -16,7 +16,7 @@ public enum Spacing {
 
 /// Corner radii for top-level containers. Anything nested inside a container
 /// should use `.concentric` corners instead of a number (see `Shapes/`).
-public enum Radius {
+nonisolated public enum Radius {
     /// Smallest radius a nested concentric shape may shrink to.
     public static let minimumNested: CGFloat = 8
     public static let control: CGFloat = 12
@@ -25,7 +25,7 @@ public enum Radius {
 }
 
 /// Hit-target sizes from the HIG (Accessibility > Mobility).
-public enum HitTarget {
+nonisolated public enum HitTarget {
     /// Default control size on iOS. Use for every tappable element.
     public static let standard: CGFloat = 44
     /// Absolute minimum. Only for dense, secondary controls.
@@ -33,6 +33,6 @@ public enum HitTarget {
 }
 
 /// Readable line length for long-form text, in points (roughly 70 characters of body text).
-public enum ReadableWidth {
+nonisolated public enum ReadableWidth {
     public static let body: CGFloat = 640
 }

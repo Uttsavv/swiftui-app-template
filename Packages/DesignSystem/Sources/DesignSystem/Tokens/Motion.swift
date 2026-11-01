@@ -1,7 +1,7 @@
 import SwiftUI
 
 /// Named motion tokens. Pick by intent, not by duration.
-public enum MotionToken: CaseIterable, Sendable {
+nonisolated public enum MotionToken: CaseIterable, Sendable {
     /// Small state changes: toggles, selection, symbol swaps.
     case quick
     /// Most UI transitions: content appearing, layout changes.
@@ -13,7 +13,7 @@ public enum MotionToken: CaseIterable, Sendable {
 }
 
 /// The app's motion personality. Agreed with the user on the first session (see CLAUDE.md).
-public struct MotionStyle: Sendable, Equatable {
+nonisolated public struct MotionStyle: Sendable, Equatable {
     public var quick: Animation
     public var standard: Animation
     public var emphasized: Animation

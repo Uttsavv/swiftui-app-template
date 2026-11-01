@@ -4,7 +4,7 @@ import SwiftUI
 ///
 /// The default palette is a deliberately neutral placeholder. On the first session in a new
 /// app, Claude asks for the colour scheme (see CLAUDE.md) and replaces it here.
-public struct Palette: Sendable, Hashable {
+nonisolated public struct Palette: Sendable, Hashable {
     /// Screen background (content layer).
     public var background: ColorToken
     /// Cards and grouped content sitting on `background`.
@@ -88,7 +88,7 @@ extension Palette {
 }
 
 /// Resolved SwiftUI colours for the current palette: `theme.colors.textPrimary`.
-public struct ThemeColors: Sendable {
+nonisolated public struct ThemeColors: Sendable {
     let palette: Palette
     public var background: Color { palette.background.color }
     public var surface: Color { palette.surface.color }

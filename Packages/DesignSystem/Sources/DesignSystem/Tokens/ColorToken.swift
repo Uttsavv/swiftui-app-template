@@ -4,7 +4,7 @@ import SwiftUI
 ///
 /// HIG (Color, Dark Mode): every custom colour needs light and dark variants, plus an
 /// Increase Contrast variant of each that is clearly more differentiated.
-public struct ColorToken: Sendable, Hashable {
+nonisolated public struct ColorToken: Sendable, Hashable {
     public var light: RGB
     public var dark: RGB
     public var lightHighContrast: RGB

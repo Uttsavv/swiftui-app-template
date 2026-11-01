@@ -1,7 +1,7 @@
 import SwiftUI
 
 /// Everything a view needs to look on-brand. Read it with `@Environment(\.theme)`.
-public struct Theme: Sendable {
+nonisolated public struct Theme: Sendable {
     public var palette: Palette
     public var typography: Typography
     public var motion: MotionStyle

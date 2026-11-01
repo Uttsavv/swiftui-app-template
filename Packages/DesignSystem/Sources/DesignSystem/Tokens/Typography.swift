@@ -5,7 +5,7 @@ import SwiftUI
 ///
 /// HIG (Typography): prefer built-in text styles, avoid Ultralight/Thin/Light weights,
 /// keep body at 17 pt default and never below 11 pt, and minimise the number of typefaces.
-public enum TextRole: CaseIterable, Sendable {
+nonisolated public enum TextRole: CaseIterable, Sendable {
     case largeTitle, title, title2, title3, headline, body, callout, subheadline, footnote, caption, caption2
 
     public var style: Font.TextStyle {
@@ -27,7 +27,7 @@ public enum TextRole: CaseIterable, Sendable {
 
 /// Font choices for the app. Change `design` (e.g. `.serif`, `.rounded`) rather than shipping
 /// custom fonts unless the brand truly needs one; system fonts get optical sizing for free.
-public struct Typography: Sendable, Hashable {
+nonisolated public struct Typography: Sendable, Hashable {
     public var design: Font.Design
     /// Design used for long-form reading text, if different.
     public var readingDesign: Font.Design
