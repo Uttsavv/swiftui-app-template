@@ -5,25 +5,33 @@ import SwiftUI
 /// such as appearance or text size. Link to the system Settings app instead.
 struct SettingsView: View {
     @Environment(\.openURL) private var openURL
+    @Environment(\.theme) private var theme
 
     var body: some View {
         NavigationStack {
             Form {
-                Section("General") {
+                Section {
                     Button("Open System Settings") {
                         if let url = URL(string: UIApplication.openSettingsURLString) { openURL(url) }
                     }
-                }
-                Section("Developer") {
+                } header: { header("General") }
+                Section {
                     NavigationLink("Design System") { DesignSystemCatalog() }
-                }
-                Section("About") {
-                    LabeledContent("Version", value: Bundle.main.appVersion)
-                }
+                } header: { header("Developer") }
+                Section {
+                    LabeledContent("Version") {
+                        Text(Bundle.main.appVersion).foregroundStyle(theme.colors.textSecondary)
+                    }
+                } header: { header("About") }
             }
             .formStyle(.grouped)
             .navigationTitle("Settings")
         }
+    }
+
+    /// Section headers in the theme's secondary colour; the system default can fall below 4.5:1.
+    private func header(_ title: LocalizedStringKey) -> some View {
+        Text(title).foregroundStyle(theme.colors.textSecondary)
     }
 }
 

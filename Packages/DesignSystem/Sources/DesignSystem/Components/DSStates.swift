@@ -3,6 +3,7 @@ import SwiftUI
 /// Empty, loading and error states. HIG (Writing, Loading, Feedback): show something
 /// immediately, give a clear next step on blank screens, and explain errors plainly.
 public struct DSEmptyState: View {
+    @Environment(\.theme) private var theme
     private let title: LocalizedStringKey
     private let systemImage: String
     private let message: LocalizedStringKey
@@ -27,7 +28,8 @@ public struct DSEmptyState: View {
         ContentUnavailableView {
             Label(title, systemImage: systemImage)
         } description: {
-            Text(message)
+            // Theme colour instead of the system secondary label, which can fall below 4.5:1.
+            Text(message).foregroundStyle(theme.colors.textSecondary)
         } actions: {
             if let actionTitle, let action {
                 Button(actionTitle, action: action).buttonStyle(.borderedProminent)
