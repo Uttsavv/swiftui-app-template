@@ -46,13 +46,13 @@ nonisolated public struct ColorToken: Sendable, Hashable {
 }
 
 #if canImport(UIKit)
-extension UIColor {
+nonisolated extension UIColor {
     convenience init(rgb: RGB) {
         self.init(red: rgb.red, green: rgb.green, blue: rgb.blue, alpha: 1)
     }
 }
 #elseif canImport(AppKit)
-extension NSColor {
+nonisolated extension NSColor {
     convenience init(rgb: RGB) {
         self.init(srgbRed: rgb.red, green: rgb.green, blue: rgb.blue, alpha: 1)
     }

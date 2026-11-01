@@ -7,11 +7,20 @@ final class AccessibilityAuditTests: XCTestCase {
         continueAfterFailure = false
     }
 
+    /// Runs the audit and logs every issue with the element it was found on.
+    @MainActor
+    private func audit(_ app: XCUIApplication, for types: XCUIAccessibilityAuditType = .all) throws {
+        try app.performAccessibilityAudit(for: types) { issue in
+            print("Accessibility issue: \(issue.compactDescription) | \(issue.detailedDescription) | element: \(issue.element?.debugDescription ?? "none")")
+            return false
+        }
+    }
+
     @MainActor
     func testHomeScreenPassesAudit() throws {
         let app = XCUIApplication()
         app.launch()
-        try app.performAccessibilityAudit()
+        try audit(app)
     }
 
     @MainActor
@@ -19,7 +28,7 @@ final class AccessibilityAuditTests: XCTestCase {
         let app = XCUIApplication()
         app.launch()
         app.tabBars.buttons["Settings"].tap()
-        try app.performAccessibilityAudit()
+        try audit(app)
     }
 
     @MainActor
@@ -27,6 +36,6 @@ final class AccessibilityAuditTests: XCTestCase {
         let app = XCUIApplication()
         app.launchArguments += ["-UIPreferredContentSizeCategoryName", "UICTContentSizeCategoryAccessibilityXXXL"]
         app.launch()
-        try app.performAccessibilityAudit(for: [.dynamicType, .textClipped])
+        try audit(app, for: [.dynamicType, .textClipped])
     }
 }
