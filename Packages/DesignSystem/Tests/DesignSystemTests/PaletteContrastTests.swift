@@ -8,8 +8,8 @@ struct PaletteContrastTests {
     func pairingMeetsMinimum(name: String) throws {
         let requirement = try #require(Palette.contrastRequirements.first { $0.name == name })
         let palette = Theme.default.palette
-        let fg = palette[keyPath: requirement.foreground]
-        let bg = palette[keyPath: requirement.background]
+        let fg = requirement.foreground(palette)
+        let bg = requirement.background(palette)
 
         for ((variant, f), (_, b)) in zip(fg.variants, bg.variants) {
             let ratio = f.contrastRatio(with: b)
@@ -22,8 +22,8 @@ struct PaletteContrastTests {
     func highContrastIsNotWeaker(name: String) throws {
         let requirement = try #require(Palette.contrastRequirements.first { $0.name == name })
         let palette = Theme.default.palette
-        let fg = palette[keyPath: requirement.foreground]
-        let bg = palette[keyPath: requirement.background]
+        let fg = requirement.foreground(palette)
+        let bg = requirement.background(palette)
 
         #expect(fg.lightHighContrast.contrastRatio(with: bg.lightHighContrast) >= fg.light.contrastRatio(with: bg.light) - 0.01)
         #expect(fg.darkHighContrast.contrastRatio(with: bg.darkHighContrast) >= fg.dark.contrastRatio(with: bg.dark) - 0.01)

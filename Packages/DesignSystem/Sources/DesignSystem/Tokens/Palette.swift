@@ -48,8 +48,8 @@ nonisolated public struct Palette: Sendable, Hashable {
     /// A pair of colours that must meet a minimum contrast in every appearance.
     public struct ContrastRequirement: Sendable {
         public let name: String
-        public let foreground: KeyPath<Palette, ColorToken>
-        public let background: KeyPath<Palette, ColorToken>
+        public let foreground: @Sendable (Palette) -> ColorToken
+        public let background: @Sendable (Palette) -> ColorToken
         /// HIG / WCAG AA: 4.5 for text up to 17 pt, 3 for large or bold text and icons.
         public let minimum: Double
     }
@@ -70,7 +70,7 @@ nonisolated public struct Palette: Sendable, Hashable {
     ]
 }
 
-extension Palette {
+nonisolated extension Palette {
     /// Neutral slate placeholder. Replace after the colour-scheme conversation.
     public static let placeholder = Palette(
         background: .init(light: RGB(0xF5F6F8), dark: RGB(0x0F1115), lightHighContrast: RGB(0xFFFFFF), darkHighContrast: RGB(0x000000)),
