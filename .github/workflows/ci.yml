@@ -40,7 +40,11 @@ jobs:
             -project "$NAME.xcodeproj" -scheme "$NAME" \
             -destination "platform=iOS Simulator,name=$SIM" \
             -resultBundlePath TestResults.xcresult \
-            CODE_SIGNING_ALLOWED=NO | xcbeautify
+            CODE_SIGNING_ALLOWED=NO | tee xcodebuild.log | xcbeautify
+
+      - name: Show accessibility issues
+        if: failure()
+        run: grep "Accessibility issue:" xcodebuild.log || true
 
       - name: Upload test results
         if: failure()
